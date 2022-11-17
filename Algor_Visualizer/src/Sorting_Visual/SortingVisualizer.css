@@ -1,0 +1,19 @@
+.arr-container {
+    position: relative;
+    left: 100px;
+
+}
+
+.arr-bar {
+    width: 2px;
+    background-color: red;
+
+    display: inline-block;
+    margin: 0 1px
+}
+
+.list-btn{
+    position: absolute;
+
+
+}
