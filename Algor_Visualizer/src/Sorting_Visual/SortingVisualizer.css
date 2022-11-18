@@ -5,8 +5,8 @@
 }
 
 .arr-bar {
-    width: 2px;
-    background-color: red;
+    width: 100px;
+    background-color: blue;
 
     display: inline-block;
     margin: 0 1px

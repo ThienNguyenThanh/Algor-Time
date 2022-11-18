@@ -1,18 +1,52 @@
 export function SelectionSortAnimation(inputArr){
-    var arrLen = inputArr.length;
-    for(var idx = 1;idx < arrLen;idx++){
-        var currVal = inputArr[idx];
-        var prevIdx = idx - 1;
-        while(prevIdx >= 0 && inputArr[prevIdx] > currVal){
-            inputArr[prevIdx + 1] = inputArr[prevIdx]
-            prevIdx--;
+    let animations = []
+    const arrLen = inputArr.length
+    for(let idx = 0;idx < arrLen - 1; idx++){
+        var secondAnimation = []
+        var thirdAnimation = []
+
+        var minIdx = idx
+        animations.push(minIdx)     // highlight (red)
+        for(let nextIdx = idx + 1;nextIdx < arrLen;nextIdx++){
+            
+            secondAnimation.push(nextIdx)    // highlight (green)
+
+            if(inputArr[nextIdx] < inputArr[minIdx]){
+                var fouthAnimation = []
+                fouthAnimation.push(minIdx)
+                minIdx = nextIdx
+                fouthAnimation.push(minIdx)
+
+                secondAnimation.push(fouthAnimation)
+            }else{
+                secondAnimation.push(nextIdx)   // unhighlight (green)
+            }
+            
+            
         }
-        inputArr[prevIdx + 1] = currVal
+        animations.push(secondAnimation)
+
+        if(minIdx != idx){
+            // animations.push(idx)
+            let temp = inputArr[idx]
+            inputArr[idx] = inputArr[minIdx]
+            inputArr[minIdx] = temp
+
+            thirdAnimation.push([idx, minIdx])
+            thirdAnimation.push(minIdx)
+            animations.push(thirdAnimation)
+        }else{
+            thirdAnimation.push(0)
+            thirdAnimation.push(minIdx)
+            animations.push(thirdAnimation)   // unhighlight (red)
+        }
+            
+        
     }
 
-    return inputArr
+    return animations
 }
 
 
-// console.log(SelectionSortAnimation([1,4,5,2]))
+// console.log(SelectionSortAnimation([1,4,2,16,8,4,55,5,2]))
 
