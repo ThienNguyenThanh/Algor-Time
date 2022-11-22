@@ -5,6 +5,7 @@ import {SelectionSortAnimation} from '../Sorting_Implement/SelectionSortAnimatio
 const ARRAY_SIZE = 10;
 const MAX_INTERVAL = 500;
 const MIN_INTERVAL = 5;
+const EXECUTE_TIME = 500;
 
 
 function randomIntFromInterval(min,max)
@@ -20,38 +21,17 @@ function createRandomArray(sizeArr, minVal, maxVal){
     return randomArr
 }
 
-function setRedBackground(arrBars,index, indexTimeout, timeOut){
-    setTimeout(() => {
-        arrBars[index].style.backgroundColor = 'red';
-    }, indexTimeout * timeOut)
-}
-
-function setGreenBackground(arrBars,index,indexTimeout, timeOut){
-    setTimeout(() => {
-        arrBars[index].style.backgroundColor = 'green';
-    }, indexTimeout * timeOut)
-}
-
-function setBlueBackground(arrBars,index, indexTimeout,timeOut){
-    setTimeout(() => {
-        arrBars[index].style.backgroundColor = 'blue';
-    }, indexTimeout * timeOut)
-}
-
-function setTwoBackground(arrBars,firstIndex, secondIndex,indexTimeout, timeOut){
-    setTimeout(() => {
-        arrBars[firstIndex].style.backgroundColor = 'blue';
-        arrBars[secondIndex].style.backgroundColor = 'red';
-    }, indexTimeout * timeOut)
+function setDelay(time){
+    return new Promise((resolve) => setTimeout(resolve, time))
 }
 
 
-function setHeight(arr,arrBars,firstIndex,secondIndex, indexTimeout, timeOut){
-    setTimeout(() => {
+function switchHeight(arr,arrBars,firstIndex,secondIndex, indexTimeout, timeOut){
+    
         arrBars[firstIndex].style.height = `${arr[firstIndex]}px`;
         arrBars[secondIndex].style.height = `${arr[secondIndex]}px`;
         arrBars[secondIndex].style.backgroundColor = 'blue';
-    }, indexTimeout * timeOut)
+
 }
 
 export default function SortingVisualizer() {
@@ -61,43 +41,53 @@ export default function SortingVisualizer() {
         setArr(createRandomArray(ARRAY_SIZE, MIN_INTERVAL, MAX_INTERVAL))
     },[])
 
-    function SelectionSort(){
+    async function SelectionSort(){
         const arrBars = document.getElementsByClassName('arr-bar')
 
         var animations = SelectionSortAnimation(arr)
-        console.log(animations)
+        
         for(var animate in animations){
             if(animate % 3 ==0){
-                setRedBackground(arrBars, animations[animate],animate, 1000)
-                // console.log(`layer 1: ${animations[animate]}`)
+                
+                 arrBars[animations[animate]].style.backgroundColor = 'red';
+                 await setDelay(EXECUTE_TIME)
+                
             }else if(animate % 3 ==1){
                 for(var idx in animations[animate]){
                     if(idx % 2 == 0){
-                        setGreenBackground(arrBars, animations[animate][idx],animate, 1000)
-                        // console.log(`layer 2: ${animations[animate][idx]}`)
                         
+                        arrBars[animations[animate][idx]].style.backgroundColor = 'green';
+                        
+                        await setDelay(EXECUTE_TIME)
 
                     }else{
                         if(animations[animate][idx].length > 1){
-                            // console.log(`layer 2: ${animations[animate][idx]}`)
-                            
+                
 
-                            setTwoBackground(arrBars, animations[animate][idx][0], animations[animate][idx][1],animate, 1000)
+                            // Unhighlight
+                            arrBars[animations[animate][idx][0]].style.backgroundColor = 'blue';
+                            arrBars[animations[animate][idx][1]].style.backgroundColor = 'red';
+                            await setDelay(EXECUTE_TIME)
                         }else{
-                            // console.log(`layer 2: ${animations[animate][idx]}`)
-                            
-
-                            setBlueBackground(arrBars, animations[animate][idx], animate,1000)
+                           
+                             arrBars[animations[animate][idx]].style.backgroundColor = 'blue';
+                             await setDelay(EXECUTE_TIME)
                         }
                         
                     }
                 }
             } else if(animate % 3 ==2){
                 if(animations[animate][0] != 0){
-                    setHeight(arr, arrBars, animations[animate][0][0], animations[animate][0][1], animate, 2000)
+                    
+                    arrBars[animations[animate][0][0]].style.backgroundColor = 'red';
+                    await setDelay(EXECUTE_TIME)
+
+                    switchHeight(arr, arrBars, animations[animate][0][0], animations[animate][0][1], animate, 2000)
+                    arrBars[animations[animate][0][0]].style.backgroundColor = 'blue';
                 }
 
-                setBlueBackground(arrBars, animations[animate][1],animate, 2000)
+                    arrBars[animations[animate][1]].style.backgroundColor = 'blue';
+                    await setDelay(EXECUTE_TIME)
             }
         }
         console.log("Done !!!")
