@@ -1,8 +1,8 @@
 import {React, useState, useEffect} from 'react'
 import './SortingVisualizer.css'
-import {SelectionSort} from '../sortingFunctions/SelectionSort'
-import {InsertionSort} from '../sortingFunctions/InsertionSort'
-import { BubbleSort } from '../sortingFunctions/BubbleSort'
+import {SelectionSort} from '../sortFunctions/SelectionSort'
+import {InsertionSort} from '../sortFunctions/InsertionSort'
+import { BubbleSort } from '../sortFunctions/BubbleSort'
 
 const ARRAY_SIZE = 10;
 const MAX_INTERVAL = 500;
