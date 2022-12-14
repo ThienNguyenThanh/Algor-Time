@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components'
 
-const rightToLeftAnimation = keyframes`
+export const rightToLeftAnimation = keyframes`
 0%{
     background-color: red;
   }
@@ -25,7 +25,7 @@ const rightToLeftAnimation = keyframes`
   }
 `;
 
-const leftToRightAnimation = keyframes`
+export const leftToRightAnimation = keyframes`
 0%{
     background-color: red;
   }
@@ -63,9 +63,5 @@ const StyledButton = styled.button`
     };
     animation: ${() => rightToLeftAnimation} ${() => 3}s forwards;
 `
-
-
-
-
 
 export default StyledButton
