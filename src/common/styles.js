@@ -21,53 +21,55 @@ export const ArrayItem = styled.div`
   border-radius: 5px;
   flex-shrink: 0;
 `;
-export const rightToLeftAnimation = (distance) => keyframes`
-0%{
-    background-color: red;
-  }
-  40%{
-    transform: translate(0px, 0px);
-    background-color: red;
-  }
-  60% {
-    transform: translate(0px, -50px);
-    background-color: red;
-  }
-  80% {
-    transform: translate(-${distance * 100}px, -50px);
-    background-color: red;
-  }
-  99% {
-    transform: translate(-${distance * 100}px, 0px);
-    background-color: red;
-  }
-  100%{
-    transform: translate(-${distance * 100}px, 0px);
-  }
-`;
 
-export const leftToRightAnimation = (distance) => keyframes`
-0%{
-    background-color: red;
+export const rightToLeftAnimation = (distance, swapColor) => keyframes`
+  0%{
+    background-color: ${swapColor};
   }
   40%{
     transform: translate(0px, 0px);
-    background-color:red;
+    background-color: ${swapColor};
   }
   60% {
     transform: translate(0px, 50px);
-    background-color: red;
+    background-color: ${swapColor};
   }
   80% {
-    transform: translate(${distance * 100}px, 50px);
-    background-color: red;
+    transform: translate(-${distance * 50}px, 50px);
+    background-color: ${swapColor};
   }
   99% {
-    transform: translate(${distance * 100}px, 0px);
-    background-color: red;
+    transform: translate(-${distance * 50}px, 0px);
+    background-color: ${swapColor};
   }
   100%{
-    transform: translate(${distance * 100}px, 0px);
+    transform: translate(-${distance * 50}px, 0px);
+    background-color: none;
+  }
+`;
+
+export const leftToRightAnimation = (distance, swapColor) => keyframes`
+  0%{
+    background-color: ${swapColor};
+  }
+  40%{
+    transform: translate(0px, 0px);
+    background-color: ${swapColor};
+  }
+  60% {
+    transform: translate(0px, -50px);
+    background-color: ${swapColor};
+  }
+  80% {
+    transform: translate(${distance * 50}px, -50px);
+    background-color: ${swapColor};
+  }
+  99% {
+    transform: translate(${distance * 50}px, 0px);
+    background-color: ${swapColor};
+  }
+  100%{
+    transform: translate(${distance * 50}px, 0px);
     background-color: none;
   }
 `;
