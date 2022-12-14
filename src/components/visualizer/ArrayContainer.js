@@ -9,6 +9,8 @@ export function ArrayContainer({
     sortedIndices,
 }){
     return (
+        <>
+        <h1>{array}</h1>
         <ArrayHolder>
             {array.map((value, idx) =>{
                 return (
@@ -21,5 +23,7 @@ export function ArrayContainer({
             })}
         </ArrayHolder>
 
+        </>
+        
     )
 }

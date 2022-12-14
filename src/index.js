@@ -4,11 +4,13 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 // import SortingVisualizer from './components/SortingVisualizer';
 import {AlgorDisplay} from './components/AlgorDisplay'
+import {Controller} from './components/Controller'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Controller />
     <AlgorDisplay />
   </React.StrictMode>
 
