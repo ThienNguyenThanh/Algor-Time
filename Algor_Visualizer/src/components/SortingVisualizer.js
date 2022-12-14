@@ -7,7 +7,7 @@ import { BubbleSort } from '../sortFunctions/BubbleSort'
 const ARRAY_SIZE = 10;
 const MAX_INTERVAL = 500;
 const MIN_INTERVAL = 5;
-const DELAY_TIME = 200;
+const DELAY_TIME = 500;
 
 
 function randomIntFromInterval(min,max)
@@ -47,9 +47,6 @@ export default function SortingVisualizer() {
             <button onClick={() => SelectionSort(arr, ARRAY_SIZE, DELAY_TIME)}>Selection Sort</button>
             <button onClick={() => BubbleSort(arr, ARRAY_SIZE, DELAY_TIME)}>Bubble Sort</button>
             <button onClick={() => InsertionSort(arr, ARRAY_SIZE, DELAY_TIME)}>Insertion Sort</button>
-            <button>Merge Sort</button>
-            <button>Quick Sort</button>
-            <button>Heap Sort</button>
         </div>
         
         </>
