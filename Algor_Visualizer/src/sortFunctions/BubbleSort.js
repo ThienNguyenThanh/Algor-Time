@@ -22,8 +22,11 @@ export async function BubbleSort(inputArr, arrLen, DELAY_TIME){
 
                 await setDelay(DELAY_TIME)
 
+                arrBars[idx].style.transition = `all 0.5s`;
+                arrBars[idx + 1].style.transition = `all 0.5s`;
                 arrBars[idx].style.height = `${inputArr[idx]}px`;
                 arrBars[idx + 1].style.height = `${inputArr[idx + 1]}px`;
+
                 arrBars[idx].style.backgroundColor = 'green';
                 arrBars[idx + 1].style.backgroundColor = 'red';
                 await setDelay(DELAY_TIME)

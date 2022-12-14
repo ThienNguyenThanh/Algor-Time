@@ -17,6 +17,8 @@ export async function InsertionSort(inputArr, arrLen, DELAY_TIME){
                 inputArr[prevIdx + 1] = inputArr[prevIdx]
                 inputArr[prevIdx] = currVal
 
+                arrBars[prevIdx + 1].style.transition = `all 0.5s`;
+                arrBars[prevIdx].style.transition = `all 0.5s`;
                 arrBars[prevIdx + 1].style.height = `${inputArr[prevIdx + 1]}px`;
                 arrBars[prevIdx].style.height = `${currVal}px`;
 
@@ -32,7 +34,7 @@ export async function InsertionSort(inputArr, arrLen, DELAY_TIME){
        
             prevIdx--;
         } 
-        arrBars[idx].style.backgroundColor = 'blue';  
+
     }
 
     console.log("Done")
