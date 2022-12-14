@@ -1,6 +1,6 @@
 import {SelectionSortGen} from '../sortFunctions/SelectionSortGen'
-import {BubbleSort} from '../sortFunctions/BubbleSort'
-import {InsertionSort} from '../sortFunctions/InsertionSort'
+import {BubbleSortGen} from '../sortFunctions/BubbleSortGen'
+import {InsertionSortGen} from '../sortFunctions/InsertionSortGen'
 
 export const comparisionColor = "pink";
 export const swapColor = "yellow";
@@ -13,7 +13,7 @@ export let compareTime = 500;
 
 
 export const sortingAlgorithms = [
-    { component: BubbleSort, title: "Bubble", name: "BubbleSort" },
+    { component: BubbleSortGen, title: "Bubble", name: "BubbleSort" },
     { component: SelectionSortGen, title: "Selection", name: "SelectionSort" },
-    { component: InsertionSort, title: "Insertion", name: "InsertionSort" }
+    { component: InsertionSortGen, title: "Insertion", name: "InsertionSort" }
   ];
