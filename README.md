@@ -1,3 +1,3 @@
-# Solution for Data Structure & Algorithm question
+# Algorithm Visualizer
 
-### Visulizing Algorithms: [Link artical](https://bost.ocks.org/mike/algorithms/)
+### Live Demo: [Link](https://visual-algor.netlify.app/)
