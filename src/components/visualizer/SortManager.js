@@ -46,6 +46,7 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
       sortProgressIterator.current = await sortFunctions(algorArray.current, 
                                                           swap,
                                                           hightlight,
+                                                          unHighlight,
                                                           markSort);
   }
 
@@ -115,6 +116,10 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
       pivot.current = p;
       setHightlightedIndices(indices);
       await setDelay(compareTime);
+  }
+
+  async function unHighlight(){
+    setHightlightedIndices([-1,-1])
   }
 
   function markSort(...indices) {
