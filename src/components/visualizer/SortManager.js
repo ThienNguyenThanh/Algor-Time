@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {useRef} from 'react'
+import React, {useRef} from 'react'
 import { useArray, useControls } from '../../common/stateManage'
 import {setDelay} from '../../common/helper'
 import shallow from 'zustand/shallow'
@@ -19,7 +19,7 @@ import { ArrayContainer } from './ArrayContainer'
 //   shallow
 // );
 
-export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
+export const SortManager = React.memo(function ({array, sortFunctions, sortingAlgorithmName}){
 
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
@@ -55,7 +55,7 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
       useControls.subscribe(
         (value) => {
           progress.current = value.progress;
-          // console.log(value.progress)
+          console.log(progress.current)
           // console.log(`isComponentUnmounted: ${isComponentUnMounted.current}`)
           if (progress.current === "start") runAlgo();
           if (progress.current === "reset") reset();
@@ -82,6 +82,7 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
       ){  
           
           completion = await sortProgressIterator.current?.next();
+          console.log(`Competion: ${JSON.stringify(completion)}`)
           
       }
 
@@ -110,6 +111,7 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
   }
 
   async function hightlight(indices, p){
+    console.log(`Indices in hightlight: ${indices}`)
       setSwapIndices([-1, -1]);
 
       pivot.current = p;
@@ -118,7 +120,7 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
   }
 
   function markSort(...indices) {
-      console.log(indices)
+      console.log(`Index: ${JSON.stringify(indices)}`)
       sortedIndices.current.push(...indices);
     }
 
@@ -138,4 +140,4 @@ export function SortManager ({array, sortFunctions, sortingAlgorithmName}){
 
       </>
   )
-}
+});
