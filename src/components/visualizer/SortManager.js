@@ -46,6 +46,7 @@ export const SortManager = React.memo(function ({array, sortFunctions, sortingAl
       sortProgressIterator.current = await sortFunctions(algorArray.current, 
                                                           swap,
                                                           hightlight,
+                                                          unHighlight,
                                                           markSort);
   }
 
@@ -117,6 +118,10 @@ export const SortManager = React.memo(function ({array, sortFunctions, sortingAl
       pivot.current = p;
       setHightlightedIndices(indices);
       await setDelay(compareTime);
+  }
+
+  async function unHighlight(){
+    setHightlightedIndices([-1,-1])
   }
 
   function markSort(...indices) {

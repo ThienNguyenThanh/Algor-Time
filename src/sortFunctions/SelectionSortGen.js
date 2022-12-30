@@ -19,18 +19,20 @@
 //     }
 //   }
 
-export async function* SelectionSortGen(array, swap, highlight, marksort) {
+export async function* SelectionSortGen(array, swap, highlight,unHighlight, marksort) {
       for (let idx = 0; idx < array.length; idx++) {
         
         let minIndex = idx;
-        for (var nextIdx = idx; nextIdx < array.length; nextIdx++) {
+        for (var nextIdx = idx + 1; nextIdx < array.length; nextIdx++) {
           yield await highlight([minIndex, nextIdx]);
     
           if (array[minIndex] > array[nextIdx]) {
             minIndex = nextIdx;
           }
         }
-        if (minIndex !== idx  && array[minIndex] !== array[idx]){
+    
+        yield await unHighlight()
+        if (minIndex !== idx) {
           yield await swap(idx, minIndex);
         }
     
