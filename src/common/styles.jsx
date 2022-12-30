@@ -1,6 +1,4 @@
-import styled, {keyframes} from 'styled-components'
-import {setDelay} from '../common/helper.js'
-
+import styled, { keyframes } from "styled-components";
 
 export const ArrayHolder = styled.div`
   display: flex;
@@ -22,7 +20,41 @@ export const ArrayItem = styled.div`
   flex-shrink: 0;
 `;
 
-export const rightToLeftAnimation = (distance, swapColor) => keyframes`
+export const swapAnimation = (distance, swapColor) => keyframes`
+  0%{
+    background-color: ${swapColor};
+  }
+  10%{
+    transform: translate(0px, 0px);
+    background-color: ${swapColor};
+  }
+  30% {
+    transform: translate(0px, -50px);
+    background-color: ${swapColor};
+  }
+  70% {
+    transform: translate(-${distance * 50}px, -50px);
+    background-color: ${swapColor};
+  }
+  99% {
+    transform: translate(-${distance * 50}px, 0px);
+    background-color: ${swapColor};
+  }
+  100%{
+    transform: translate(-${distance * 50}px, 0px);
+  }
+`;
+
+export const moveAnimation = () => keyframes`
+  0%{
+    transform: translate(0px, 0px);
+  }
+  100%{
+    transform: translate(50px, 0px);
+  }
+`;
+
+export const destinationAnimation = (distance, swapColor) => keyframes`
   0%{
     background-color: ${swapColor};
   }
@@ -48,7 +80,7 @@ export const rightToLeftAnimation = (distance, swapColor) => keyframes`
   }
 `;
 
-export const leftToRightAnimation = (distance, swapColor) => keyframes`
+export const sourceAnimation = (distance, swapColor) => keyframes`
   0%{
     background-color: ${swapColor};
   }
@@ -73,35 +105,3 @@ export const leftToRightAnimation = (distance, swapColor) => keyframes`
     background-color: none;
   }
 `;
-
-
-const StyledButton = styled.button`
-    position:relative;
-    width: 100px;
-    top: 200px;
-
-    font-size: 16px;
-    transition: 0.5s;
-    background-color: ${(props) => 
-        props.varient === 'outline' ? 'blue' : 'green'
-    };
-    animation: ${(props) =>  props.varient === 'outline' ? rightToLeftAnimation(props.distance) : leftToRightAnimation(props.distance)} ${() => 3}s forwards;
-`
-
-
-const myArr = [1,2,3,4,5]
-
-
-export default function ListStyledButton() {
-
-
-
-  return (<>
-    
-      {myArr}
-
-  </>
-  )
-  
-
-}

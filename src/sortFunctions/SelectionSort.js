@@ -1,66 +1,25 @@
-import {setDelay} from '../common/helper.js'
-import '../components/SortingVisualizer.css';
-import styled from 'styled-components';
-
-export async function SelectionSort(arr, ARRAY_SIZE, EXECUTE_TIME){
-    const arrBars = document.getElementsByClassName('arr-bar')
-    
-    for(let idx = 0;idx < ARRAY_SIZE - 1; idx++){
-
-        var minIdx = idx
-        arrBars[minIdx].style.backgroundColor = 'red'     // highlight current min value
-
-        await setDelay(EXECUTE_TIME)
-
-        for(let nextIdx = idx + 1;nextIdx < ARRAY_SIZE;nextIdx++){
-            
-            arrBars[nextIdx].style.backgroundColor = 'green';     // highlight compared value with current min value
-            await setDelay(EXECUTE_TIME)
-
-            if(arr[nextIdx] < arr[minIdx]){
-                        
-                // Highlight NEW min value
-                arrBars[minIdx].style.backgroundColor = 'blue';
-                minIdx = nextIdx
-                arrBars[minIdx].style.backgroundColor = 'red'
-                await setDelay(EXECUTE_TIME)
-
-            }else{
-                arrBars[nextIdx].style.backgroundColor = 'blue';
-                await setDelay(EXECUTE_TIME)
-            }
-            
-            
-        }
-
-
-        if(minIdx !== idx){
-
-            let temp = arr[idx]
-            arr[idx] = arr[minIdx]
-            arr[minIdx] = temp
-
-            // Highlight start position
-            arrBars[idx].style.backgroundColor = 'red';
-            await setDelay(EXECUTE_TIME)
-
-            // Switch height
-            arrBars[idx].style.transition = `all 0.5s`;
-            arrBars[minIdx].style.transition = `all 0.5s`;
-            arrBars[idx].style.height = `${arr[idx]}px`;
-            arrBars[minIdx].style.height = `${arr[minIdx]}px`;
+export async function* SelectionSort(array, swap, highlight,unHighlight, marksort) {
+  // for (let i = 0; i < array.length; i++) {
+  for (let idx = 0; idx < array.length; idx++) {
         
-            await setDelay(EXECUTE_TIME)
-            arrBars[minIdx].style.backgroundColor = 'blue';
-            arrBars[idx].style.backgroundColor = 'blue';
+    let minIndex = idx;
 
-        }else{
-            // UNHIGHLIGHT start position
-            arrBars[minIdx].style.backgroundColor = 'blue';
-            await setDelay(EXECUTE_TIME)
-        }
+    for (var nextIdx = idx + 1; nextIdx < array.length; nextIdx++) {
+      yield await highlight([minIndex,nextIdx])
+
+      if (array[minIndex] > array[nextIdx]) {
+        minIndex = nextIdx;
+        yield await highlight([minIndex])
+      }
     }
-    
-    
-    console.log("Done !!!")
+
+    yield await unHighlight()
+    if (minIndex !== idx) {
+      yield await swap(idx, minIndex);
+    }
+
+    marksort(idx);
+    yield;
+  }
+  
 }
